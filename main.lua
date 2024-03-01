@@ -3,11 +3,13 @@ function zigzag(X)
 	return math.acos(math.cos(X * math.pi)) / math.pi
 end
 counter = 0
+
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
+local Font = Enum.Font.FredokaOne
 
 coroutine.wrap(
 	function()
@@ -93,25 +95,10 @@ end
 
 local Library = Instance.new("ScreenGui")
 Library.Name = "Library"
-Library.Parent = game.CoreGui
+Library.Parent = gethui() or game.CoreGui
 Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local uitoggled = false
-UserInputService.InputBegan:Connect(
-	function(io, p)
-		if io.KeyCode == Enum.KeyCode.RightControl then
-			if uitoggled == false then
-				Library.Enabled = false
-				uitoggled = true
-			else
-				Library.Enabled = true
-				uitoggled = false
-			end
-		end
-	end
-)
-
-function VLib:Window(textgame)
+function VLib:Window(mainTitle, textgame, toggleKeycode)
 	local FirstTab = false
 	local MainFrame = Instance.new("Frame")
 	local MainCorner = Instance.new("UICorner")
@@ -128,7 +115,18 @@ function VLib:Window(textgame)
 	local RainbowLineCorner = Instance.new("UICorner")
 	local ContainerHold = Instance.new("Folder")
 	local DragFrame = Instance.new("Frame")
-
+	local uitoggled = false
+	UserInputService.InputBegan:Connect(function(io, p)
+		if io.KeyCode == toggleKeycode then
+			if uitoggled == false then
+				Library.Enabled = false
+				uitoggled = true
+			else
+				Library.Enabled = true
+				uitoggled = false
+			end
+		end
+	end)
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = Library
 	MainFrame.BackgroundColor3 = Color3.fromRGB(22, 23, 27)
@@ -155,8 +153,8 @@ function VLib:Window(textgame)
 	MainTitle.BackgroundTransparency = 1.000
 	MainTitle.Position = UDim2.new(0.324129045, 0, 0.0512162149, 0)
 	MainTitle.Size = UDim2.new(0, 71, 0, 20)
-	MainTitle.Font = Enum.Font.Gotham
-	MainTitle.Text = MAINTTL
+	MainTitle.Font = Font
+	MainTitle.Text = mainTitle
 	MainTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 	MainTitle.TextSize = 14.000
 	MainTitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -176,7 +174,7 @@ function VLib:Window(textgame)
 	CircleName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	CircleName.BackgroundTransparency = 1.000
 	CircleName.Size = UDim2.new(0, 38, 0, 37)
-	CircleName.Font = Enum.Font.Gotham
+	CircleName.Font = Font
 	CircleName.Text = "NBT"
 	CircleName.TextColor3 = Color3.fromRGB(255, 255, 255)
 	CircleName.TextSize = 16.000
@@ -187,7 +185,7 @@ function VLib:Window(textgame)
 	GameTitle.BackgroundTransparency = 1.000
 	GameTitle.Position = UDim2.new(0.324129164, 0, 0.0892162398, 0)
 	GameTitle.Size = UDim2.new(0, 71, 0, 20)
-	GameTitle.Font = Enum.Font.Gotham
+	GameTitle.Font = Font
 	GameTitle.Text = textgame
 	GameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 	GameTitle.TextSize = 14.000
@@ -226,7 +224,6 @@ function VLib:Window(textgame)
 	DragFrame.Position = UDim2.new(0.30130294, 0, 0.00253164559, 0)
 	DragFrame.Size = UDim2.new(0, 428, 0, 21)
 	MakeDraggable(DragFrame, MainFrame)
-
 	coroutine.wrap(
 		function()
 			while wait() do
@@ -246,7 +243,7 @@ function VLib:Window(textgame)
 		Tab.BackgroundColor3 = Color3.fromRGB(118, 106, 255)
 		Tab.Size = UDim2.new(0, 159, 0, 29)
 		Tab.AutoButtonColor = false
-		Tab.Font = Enum.Font.SourceSans
+		Tab.Font = Font
 		Tab.Text = ""
 		Tab.TextColor3 = Color3.fromRGB(0, 0, 0)
 		Tab.TextSize = 14.000
@@ -262,7 +259,7 @@ function VLib:Window(textgame)
 		Title.BackgroundTransparency = 1.000
 		Title.Position = UDim2.new(0.0566037744, 0, 0, 0)
 		Title.Size = UDim2.new(0, 150, 0, 29)
-		Title.Font = Enum.Font.Gotham
+		Title.Font = Font
 		Title.Text = text
 		Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 		Title.TextSize = 14.000
@@ -336,7 +333,7 @@ function VLib:Window(textgame)
 			Button.BackgroundColor3 = Color3.fromRGB(32, 33, 37)
 			Button.Size = UDim2.new(0, 403, 0, 28)
 			Button.AutoButtonColor = false
-			Button.Font = Enum.Font.Gotham
+			Button.Font = Font
 			Button.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Button.TextSize = 14.000
 			Button.Text = text
@@ -394,7 +391,7 @@ function VLib:Window(textgame)
 			Toggle.Position = UDim2.new(-0.747557044, 0, 0.729113936, 0)
 			Toggle.Size = UDim2.new(0, 403, 0, 28)
 			Toggle.AutoButtonColor = false
-			Toggle.Font = Enum.Font.Gotham
+			Toggle.Font = Font
 			Toggle.Text = ""
 			Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Toggle.TextSize = 14.000
@@ -409,7 +406,7 @@ function VLib:Window(textgame)
 			Title.BackgroundTransparency = 1.000
 			Title.Position = UDim2.new(0.0198511165, 0, 0, 0)
 			Title.Size = UDim2.new(0, 192, 0, 28)
-			Title.Font = Enum.Font.Gotham
+			Title.Font = Font
 			Title.Text = text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Title.TextSize = 14.000
@@ -522,7 +519,7 @@ function VLib:Window(textgame)
 			Slider.Position = UDim2.new(-0.747557044, 0, 0.729113936, 0)
 			Slider.Size = UDim2.new(0, 403, 0, 49)
 			Slider.AutoButtonColor = false
-			Slider.Font = Enum.Font.Gotham
+			Slider.Font = Font
 			Slider.Text = ""
 			Slider.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Slider.TextSize = 14.000
@@ -533,7 +530,7 @@ function VLib:Window(textgame)
 			Title.BackgroundTransparency = 1.000
 			Title.Position = UDim2.new(0.0198511165, 0, 0, 0)
 			Title.Size = UDim2.new(0, 192, 0, 28)
-			Title.Font = Enum.Font.Gotham
+			Title.Font = Font
 			Title.Text = text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Title.TextSize = 14.000
@@ -568,7 +565,7 @@ function VLib:Window(textgame)
 			Value.BackgroundTransparency = 1.000
 			Value.Position = UDim2.new(0.496277869, 0, 0, 0)
 			Value.Size = UDim2.new(0, 192, 0, 28)
-			Value.Font = Enum.Font.Gotham
+			Value.Font = Font
 			Value.Text = tostring(start and math.floor((start / max) * (max - min) + min) or 0)
 			Value.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Value.TextSize = 14.000
@@ -639,7 +636,7 @@ function VLib:Window(textgame)
 			Dropdown.Position = UDim2.new(-0.747557044, 0, 0.729113936, 0)
 			Dropdown.Size = UDim2.new(0, 403, 0, 28)
 			Dropdown.AutoButtonColor = false
-			Dropdown.Font = Enum.Font.Gotham
+			Dropdown.Font = Font
 			Dropdown.Text = ""
 			Dropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Dropdown.TextSize = 14.000
@@ -650,7 +647,7 @@ function VLib:Window(textgame)
 			Title.BackgroundTransparency = 1.000
 			Title.Position = UDim2.new(0.0198511165, 0, 0, 0)
 			Title.Size = UDim2.new(0, 192, 0, 28)
-			Title.Font = Enum.Font.Gotham
+			Title.Font = Font
 			Title.Text = text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Title.TextSize = 14.000
@@ -805,7 +802,7 @@ function VLib:Window(textgame)
 				Item.Position = UDim2.new(0, 0, 0.0808080807, 0)
 				Item.Size = UDim2.new(0, 382, 0, 24)
 				Item.AutoButtonColor = false
-				Item.Font = Enum.Font.Gotham
+				Item.Font = Font
 				Item.TextColor3 = Color3.fromRGB(255, 255, 255)
 				Item.TextSize = 14.000
 				Item.Text = v
@@ -891,7 +888,7 @@ function VLib:Window(textgame)
 			Colorpicker.Position = UDim2.new(-0.747557044, 0, 0.729113936, 0)
 			Colorpicker.Size = UDim2.new(0, 403, 0, 28)
 			Colorpicker.AutoButtonColor = false
-			Colorpicker.Font = Enum.Font.Gotham
+			Colorpicker.Font = Font
 			Colorpicker.Text = ""
 			Colorpicker.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Colorpicker.TextSize = 14.000
@@ -902,7 +899,7 @@ function VLib:Window(textgame)
 			Title.BackgroundTransparency = 1.000
 			Title.Position = UDim2.new(0.0198511165, 0, 0, 0)
 			Title.Size = UDim2.new(0, 192, 0, 28)
-			Title.Font = Enum.Font.Gotham
+			Title.Font = Font
 			Title.Text = text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Title.TextSize = 14.000
@@ -1017,7 +1014,7 @@ function VLib:Window(textgame)
 			Confirm.Position = UDim2.new(0.612244904, 0, 0.0900000036, 0)
 			Confirm.Size = UDim2.new(0, 145, 0, 27)
 			Confirm.AutoButtonColor = false
-			Confirm.Font = Enum.Font.Gotham
+			Confirm.Font = Font
 			Confirm.Text = "Confirm"
 			Confirm.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Confirm.TextSize = 14.000
@@ -1031,7 +1028,7 @@ function VLib:Window(textgame)
 			RainbowToggle.Position = UDim2.new(0.610732794, 0, 0.431324542, 0)
 			RainbowToggle.Size = UDim2.new(0, 145, 0, 27)
 			RainbowToggle.AutoButtonColor = false
-			RainbowToggle.Font = Enum.Font.Gotham
+			RainbowToggle.Font = Font
 			RainbowToggle.Text = ""
 			RainbowToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			RainbowToggle.TextSize = 14.000
@@ -1045,7 +1042,7 @@ function VLib:Window(textgame)
 			RainbowTitle.BackgroundTransparency = 1.000
 			RainbowTitle.Position = UDim2.new(0.0204080511, 0, 0, 0)
 			RainbowTitle.Size = UDim2.new(0, 29, 0, 27)
-			RainbowTitle.Font = Enum.Font.Gotham
+			RainbowTitle.Font = Font
 			RainbowTitle.Text = "Toggle"
 			RainbowTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			RainbowTitle.TextSize = 14.000
@@ -1337,7 +1334,7 @@ function VLib:Window(textgame)
 			Label.BackgroundColor3 = Color3.fromRGB(32, 33, 37)
 			Label.Size = UDim2.new(0, 403, 0, 28)
 			Label.AutoButtonColor = false
-			Label.Font = Enum.Font.Gotham
+			Label.Font = Font
 			Label.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Label.TextSize = 14.000
 			Label.Text = text
@@ -1363,7 +1360,7 @@ function VLib:Window(textgame)
 			Textbox.Position = UDim2.new(-0.747557044, 0, 0.729113936, 0)
 			Textbox.Size = UDim2.new(0, 403, 0, 28)
 			Textbox.AutoButtonColor = false
-			Textbox.Font = Enum.Font.Gotham
+			Textbox.Font = Font
 			Textbox.Text = ""
 			Textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Textbox.TextSize = 14.000
@@ -1374,7 +1371,7 @@ function VLib:Window(textgame)
 			Title.BackgroundTransparency = 1.000
 			Title.Position = UDim2.new(0.0198511165, 0, 0, 0)
 			Title.Size = UDim2.new(0, 192, 0, 28)
-			Title.Font = Enum.Font.Gotham
+			Title.Font = Font
 			Title.Text = text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Title.TextSize = 14.000
@@ -1394,7 +1391,7 @@ function VLib:Window(textgame)
 			TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			TextBox.BackgroundTransparency = 1.000
 			TextBox.Size = UDim2.new(0, 134, 0, 19)
-			TextBox.Font = Enum.Font.Gotham
+			TextBox.Font = Font
 			TextBox.Text = ""
 			TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 			TextBox.TextSize = 14.000
@@ -1422,4 +1419,5 @@ function VLib:Window(textgame)
 	end
 	return Tabs
 end
+
 return VLib
