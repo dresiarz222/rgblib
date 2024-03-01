@@ -2,6 +2,7 @@ local VLib = {RainbowColorValue = 0, HueSelectionPosition = 0}
 function zigzag(X)
 	return math.acos(math.cos(X * math.pi)) / math.pi
 end
+
 counter = 0
 
 local UserInputService = game:GetService("UserInputService")
@@ -95,7 +96,7 @@ end
 
 local Library = Instance.new("ScreenGui")
 Library.Name = "Library"
-Library.Parent = gethui() or game.CoreGui
+Library.Parent = gethui()
 Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 function VLib:Window(mainTitle, textgame, toggleKeycode)
@@ -115,6 +116,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 	local RainbowLineCorner = Instance.new("UICorner")
 	local ContainerHold = Instance.new("Folder")
 	local DragFrame = Instance.new("Frame")
+	local textSize = 22
 	local uitoggled = false
 	UserInputService.InputBegan:Connect(function(io, p)
 		if io.KeyCode == toggleKeycode then
@@ -156,7 +158,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 	MainTitle.Font = Font
 	MainTitle.Text = mainTitle
 	MainTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-	MainTitle.TextSize = 14.000
+	MainTitle.TextSize = textSize-5
 	MainTitle.TextXAlignment = Enum.TextXAlignment.Left
 
 	Circle.Name = "Circle"
@@ -175,7 +177,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 	CircleName.BackgroundTransparency = 1.000
 	CircleName.Size = UDim2.new(0, 38, 0, 37)
 	CircleName.Font = Font
-	CircleName.Text = "NBT"
+	CircleName.Text = ""
 	CircleName.TextColor3 = Color3.fromRGB(255, 255, 255)
 	CircleName.TextSize = 16.000
 
@@ -188,7 +190,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 	GameTitle.Font = Font
 	GameTitle.Text = textgame
 	GameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-	GameTitle.TextSize = 14.000
+	GameTitle.TextSize = textSize-7
 	GameTitle.TextTransparency = 0.400
 	GameTitle.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -246,7 +248,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 		Tab.Font = Font
 		Tab.Text = ""
 		Tab.TextColor3 = Color3.fromRGB(0, 0, 0)
-		Tab.TextSize = 14.000
+		Tab.TextSize = textSize
 		Tab.BackgroundTransparency = 1
 
 		TabCorner.CornerRadius = UDim.new(0, 6)
@@ -262,7 +264,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 		Title.Font = Font
 		Title.Text = text
 		Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-		Title.TextSize = 14.000
+		Title.TextSize = textSize
 		Title.TextXAlignment = Enum.TextXAlignment.Left
 
 		local Container = Instance.new("ScrollingFrame")
@@ -335,7 +337,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Button.AutoButtonColor = false
 			Button.Font = Font
 			Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Button.TextSize = 14.000
+			Button.TextSize = textSize
 			Button.Text = text
 
 			ButtonCorner.CornerRadius = UDim.new(0, 6)
@@ -367,9 +369,9 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 				function()
 					pcall(callback)
 					Button.TextSize = 0
-					TweenService:Create(Button, TweenInfo.new(.2, Enum.EasingStyle.Quad), {TextSize = 17}):Play()
+					TweenService:Create(Button, TweenInfo.new(.2, Enum.EasingStyle.Quad), {TextSize = textSize+5}):Play()
 					wait(.2)
-					TweenService:Create(Button, TweenInfo.new(.2, Enum.EasingStyle.Quad), {TextSize = 14}):Play()
+					TweenService:Create(Button, TweenInfo.new(.2, Enum.EasingStyle.Quad), {TextSize = textSize}):Play()
 				end
 			)
 		end
@@ -394,7 +396,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Toggle.Font = Font
 			Toggle.Text = ""
 			Toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Toggle.TextSize = 14.000
+			Toggle.TextSize = textSize
 
 			ToggleCorner.CornerRadius = UDim.new(0, 6)
 			ToggleCorner.Name = "ToggleCorner"
@@ -409,7 +411,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Title.Font = Font
 			Title.Text = text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Title.TextSize = 14.000
+			Title.TextSize = textSize
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 
 			ToggleFrame.Name = "ToggleFrame"
@@ -522,7 +524,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Slider.Font = Font
 			Slider.Text = ""
 			Slider.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Slider.TextSize = 14.000
+			Slider.TextSize = textSize
 
 			Title.Name = "Title"
 			Title.Parent = Slider
@@ -533,7 +535,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Title.Font = Font
 			Title.Text = text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Title.TextSize = 14.000
+			Title.TextSize = textSize
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 
 			SliderFrame.Name = "SliderFrame"
@@ -568,7 +570,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Value.Font = Font
 			Value.Text = tostring(start and math.floor((start / max) * (max - min) + min) or 0)
 			Value.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Value.TextSize = 14.000
+			Value.TextSize = textSize
 			Value.TextXAlignment = Enum.TextXAlignment.Right
 
 			local function slide(input)
@@ -639,7 +641,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Dropdown.Font = Font
 			Dropdown.Text = ""
 			Dropdown.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Dropdown.TextSize = 14.000
+			Dropdown.TextSize = textSize
 
 			Title.Name = "Title"
 			Title.Parent = Dropdown
@@ -650,7 +652,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Title.Font = Font
 			Title.Text = text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Title.TextSize = 14.000
+			Title.TextSize = textSize
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 
 			DropdownCorner.CornerRadius = UDim.new(0, 6)
@@ -804,7 +806,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 				Item.AutoButtonColor = false
 				Item.Font = Font
 				Item.TextColor3 = Color3.fromRGB(255, 255, 255)
-				Item.TextSize = 14.000
+				Item.TextSize = textSize
 				Item.Text = v
 
 				ItemCorner.Name = "ItemCorner"
@@ -891,7 +893,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Colorpicker.Font = Font
 			Colorpicker.Text = ""
 			Colorpicker.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Colorpicker.TextSize = 14.000
+			Colorpicker.TextSize = textSize
 
 			Title.Name = "Title"
 			Title.Parent = Colorpicker
@@ -902,7 +904,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Title.Font = Font
 			Title.Text = text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Title.TextSize = 14.000
+			Title.TextSize = textSize
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 
 			BoxColor.Name = "Boxcolor"
@@ -1017,7 +1019,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Confirm.Font = Font
 			Confirm.Text = "Confirm"
 			Confirm.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Confirm.TextSize = 14.000
+			Confirm.TextSize = textSize
 
 			ButtonCorner.Name = "ButtonCorner"
 			ButtonCorner.Parent = Confirm
@@ -1031,7 +1033,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			RainbowToggle.Font = Font
 			RainbowToggle.Text = ""
 			RainbowToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
-			RainbowToggle.TextSize = 14.000
+			RainbowToggle.TextSize = textSize
 
 			RainbowToggleCorner.Name = "RainbowToggleCorner"
 			RainbowToggleCorner.Parent = RainbowToggle
@@ -1045,7 +1047,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			RainbowTitle.Font = Font
 			RainbowTitle.Text = "Toggle"
 			RainbowTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-			RainbowTitle.TextSize = 14.000
+			RainbowTitle.TextSize = textSize
 			RainbowTitle.TextXAlignment = Enum.TextXAlignment.Left
 
 			RainbowToggleFrame.Name = "RainbowToggleFrame"
@@ -1336,7 +1338,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Label.AutoButtonColor = false
 			Label.Font = Font
 			Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Label.TextSize = 14.000
+			Label.TextSize = textSize
 			Label.Text = text
 
 			LabelCorner.CornerRadius = UDim.new(0, 6)
@@ -1363,7 +1365,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Textbox.Font = Font
 			Textbox.Text = ""
 			Textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Textbox.TextSize = 14.000
+			Textbox.TextSize = textSize
 
 			Title.Name = "Title"
 			Title.Parent = Textbox
@@ -1374,7 +1376,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			Title.Font = Font
 			Title.Text = text
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-			Title.TextSize = 14.000
+			Title.TextSize = textSize
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 
 			TextboxFrame.Name = "TextboxFrame"
@@ -1394,7 +1396,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			TextBox.Font = Font
 			TextBox.Text = ""
 			TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
-			TextBox.TextSize = 14.000
+			TextBox.TextSize = textSize
 
 			TextboxCorner.CornerRadius = UDim.new(0, 6)
 			TextboxCorner.Name = "TextboxCorner"
