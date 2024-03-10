@@ -1406,6 +1406,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 					if ep then
 						if #TextBox.Text > 0 then
 							pcall(callback, TextBox.Text)
+							Textbox.Text = ""
 							TextBox.Text = ""
 						end
 					end
