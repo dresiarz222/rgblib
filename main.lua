@@ -1396,6 +1396,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			TextBox.Text = ""
 			TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
 			TextBox.TextSize = textSize
+			TextBox.ClearTextOnFocus = false
 
 			TextboxCorner.CornerRadius = UDim.new(0, 6)
 			TextboxCorner.Name = "TextboxCorner"
