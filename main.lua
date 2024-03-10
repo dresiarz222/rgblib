@@ -1405,11 +1405,8 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 				function(ep)
 					task.wait()
 					if ep then
-						local storedText = TextBox.Text
 						if #TextBox.Text > 0 then
 							pcall(callback, TextBox.Text)
-							task.wait()
-							TextBox.Text = storedText
 						end
 					end
 				end
