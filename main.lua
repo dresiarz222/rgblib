@@ -1347,8 +1347,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 		end
-
-		function ContainerItems:Textbox(text, disapper, callback)
+		function ContainerItems:Textbox(text, callback)
 			local Textbox = Instance.new("TextButton")
 			local Title = Instance.new("TextLabel")
 			local TextboxFrame = Instance.new("Frame")
@@ -1407,9 +1406,6 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 					if ep then
 						if #TextBox.Text > 0 then
 							pcall(callback, TextBox.Text)
-							if disapper then
-								TextBox.Text = ""
-							end
 						end
 					end
 				end
