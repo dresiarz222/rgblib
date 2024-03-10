@@ -1403,12 +1403,10 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 			TextboxCorner.Parent = Textbox
 
 			TextBox.FocusLost:Connect(
-				function(ep)
+				function()
 					task.wait()
-					if ep then
-						if #TextBox.Text > 0 then
-							pcall(callback, TextBox.Text)
-						end
+					if #TextBox.Text > 0 then
+						pcall(callback, TextBox.Text)
 					end
 				end
 			)
