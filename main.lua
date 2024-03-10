@@ -1403,10 +1403,11 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 
 			TextBox.FocusLost:Connect(
 				function(ep)
+					task.wait()
 					if ep then
 						if #TextBox.Text > 0 then
 							pcall(callback, TextBox.Text)
-							Textbox.Text = ""
+							task.wait()
 							TextBox.Text = ""
 						end
 					end
