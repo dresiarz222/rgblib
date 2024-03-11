@@ -10,7 +10,7 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
-local Font = Enum.Font.FredokaOne
+local Font = Enum.Font.Ubuntu
 
 coroutine.wrap(
 	function()
@@ -116,7 +116,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 	local RainbowLineCorner = Instance.new("UICorner")
 	local ContainerHold = Instance.new("Folder")
 	local DragFrame = Instance.new("Frame")
-	local textSize = 22
+	local textSize = 10
 	local uitoggled = false
 	UserInputService.InputBegan:Connect(function(io, p)
 		if io.KeyCode == toggleKeycode then
