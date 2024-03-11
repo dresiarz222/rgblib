@@ -99,7 +99,7 @@ Library.Name = "Library"
 Library.Parent = gethui()
 Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-function VLib:Window(mainTitle, textgame, toggleKeycode)
+function VLib:Window(mainTitle, textgame, toggleKeycode, textSize)
 	local FirstTab = false
 	local MainFrame = Instance.new("Frame")
 	local MainCorner = Instance.new("UICorner")
@@ -116,7 +116,6 @@ function VLib:Window(mainTitle, textgame, toggleKeycode)
 	local RainbowLineCorner = Instance.new("UICorner")
 	local ContainerHold = Instance.new("Folder")
 	local DragFrame = Instance.new("Frame")
-	local textSize = 10
 	local uitoggled = false
 	UserInputService.InputBegan:Connect(function(io, p)
 		if io.KeyCode == toggleKeycode then
