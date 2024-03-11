@@ -10,7 +10,6 @@ local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
-local Font = Enum.Font.Ubuntu
 
 coroutine.wrap(
 	function()
@@ -99,7 +98,7 @@ Library.Name = "Library"
 Library.Parent = gethui()
 Library.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-function VLib:Window(mainTitle, textgame, toggleKeycode, textSize)
+function VLib:Window(mainTitle, textgame, toggleKeycode, Font , textSize)
 	local FirstTab = false
 	local MainFrame = Instance.new("Frame")
 	local MainCorner = Instance.new("UICorner")
@@ -118,6 +117,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode, textSize)
 	local DragFrame = Instance.new("Frame")
 	local uitoggled = false
 	local textSize = textSize
+	local Font = Font
 	UserInputService.InputBegan:Connect(function(io, p)
 		if io.KeyCode == toggleKeycode then
 			if uitoggled == false then
