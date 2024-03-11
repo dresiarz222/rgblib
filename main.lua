@@ -117,6 +117,7 @@ function VLib:Window(mainTitle, textgame, toggleKeycode, textSize)
 	local ContainerHold = Instance.new("Folder")
 	local DragFrame = Instance.new("Frame")
 	local uitoggled = false
+	local textSize = textSize
 	UserInputService.InputBegan:Connect(function(io, p)
 		if io.KeyCode == toggleKeycode then
 			if uitoggled == false then
